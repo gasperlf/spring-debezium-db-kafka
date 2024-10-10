@@ -1,0 +1,18 @@
+server:
+  port: 9999
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dgm
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1234567890
+    hikari:
+      max-lifetime: 1800000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
