@@ -3,8 +3,13 @@
 ```mermaid
 graph LR;
 U>USER] --> P(PRODUCER-SERVICE)
-SYS>SYSTEM] --> P(PRODUCER-SERVICE) --> DB((DATABASE)) --> K[KAFKA]
-C(CONSUMER-SERVICE) --> K[KAFKA]
+SYS>SYSTEM] --> P(PRODUCER-SERVICE) --> DB((DATABASE)) -- CDC-Change Data Capture --> DEBEZIUM --Produce--> K[KAFKA]
+C(CONSUMER-SERVICE) --Consume--> K[KAFKA]
+C(CONSUMER-SERVICE) --> oP{Operation}
+oP{Operation} --Indexed--> e[ELASTIC]
+oP{Operation} --Insert--> ca[CASSANDRA]
+oP{Operation} --Insert--> r[REDIS]
+oP{Operation} --Send--> api[API]
 ```
 
 ## Debezium
